@@ -6,6 +6,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import com.github.javafaker.Faker;
+import com.github.javafaker.Name;
+import java.util.Random;
 
 import java.util.List;
 
@@ -19,16 +22,24 @@ public class Main {
     @Bean
     CommandLineRunner runner (CustomerRepository customerRepository) {
         return args -> {
-            Customer alex = new Customer("kareem",
-                    "kareemabdo@gmail.com",
-                    21);
+            // Using Faker library to generate random customer data
+            var faker = new Faker();
+            Random random = new Random();
 
-            Customer alexa = new Customer("kareem",
-                    "kareemabdo@gmail.com",
-                    22);
+            // Generate random first and last names
+            Name name = faker.name();
+            String firstName = name.firstName();
+            String lastName = name.lastName();
 
-            List<Customer> customers = List.of(alex,alexa);
-            customerRepository.saveAll(customers);
+            // Create a new Customer object with generated data
+            Customer customer = new Customer(
+                    firstName +  " " + lastName,
+                    firstName.toLowerCase() + "." + lastName.toLowerCase() + "@amigoscode.com",
+                    random.nextInt(16, 99)
+            );
+
+            // Save the generated customer to the database using the repository
+            customerRepository.save(customer);
         };
     }
 }
