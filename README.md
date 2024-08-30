@@ -15,6 +15,7 @@ A comprehensive Spring Boot application for managing customer data, demonstratin
 - **CRUD Operations:** Create, Read, Update, Delete functionality for customer data.
 - **RESTful APIs:** Exposes endpoints for managing customers.
 - **Spring Data JPA:** Integrated with PostgreSQL for data persistence.
+- **JDBC Support:** Alternative data access strategy using JDBC for custom queries.
 - **Error Handling:** Robust error handling with custom exceptions.
 - **Environment Flexibility:** Easily switch between local and cloud databases.
 - **Docker Support:** Optionally containerize your application for consistent deployment.
@@ -27,6 +28,7 @@ A comprehensive Spring Boot application for managing customer data, demonstratin
 - **Java 17**
 - **Spring Boot 3**
 - **Spring Data JPA**
+- **JDBC**
 - **PostgreSQL**
 - **Hibernate**
 - **Maven**
@@ -48,7 +50,11 @@ A comprehensive Spring Boot application for managing customer data, demonstratin
    ```bash
    git clone https://github.com/yourusername/customer-management-system.git
    cd customer-management-system
-2. **Configure the Database:
+2. **Choose Data Access Method:**
+   - **JPA:** By default, the application is configured to use JPA.
+   - **JDBC:** To switch to JDBC, update the `@Repository("jdbc")` qualifier in the `CustomerDao` implementation you want to use and adjust any configurations if necessary
+
+3. **Configure the Database:**
   Update the application.yaml file with your local or cloud PostgreSQL credentials.
   For local setup:
    ```bash
@@ -57,10 +63,10 @@ A comprehensive Spring Boot application for managing customer data, demonstratin
        url: jdbc:postgresql://localhost:5332/customer
        username: your_local_username
        password: your_local_password
-3. **Build the Application:
+4. **Build the Application:**
    ```bash
    mvn clean install
-4. **Run the Application:
+5. **Run the Application:**
    ```bash
    mvn spring-boot:run
 
