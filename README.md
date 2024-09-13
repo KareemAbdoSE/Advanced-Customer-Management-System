@@ -9,6 +9,7 @@ A comprehensive Spring Boot application for managing customer data, demonstratin
 4. [Running the Application](#running-the-application)
 5. [Database Configuration](#database-configuration)
 6. [Deploying to Cloud](#deploying-to-cloud)
+7. [Docker Integration](#docker-integration)
 
 ## Features
 
@@ -16,12 +17,13 @@ A comprehensive Spring Boot application for managing customer data, demonstratin
 - **RESTful APIs:** Exposes endpoints for managing customers.
 - **Spring Data JPA:** Integrated with PostgreSQL for data persistence.
 - **JDBC Support:** Alternative data access strategy using JDBC for custom queries.
+- **Cloud Deployment:** Deployed on AWS Elastic Beanstalk with PostgreSQL RDS.
 - **Error Handling:** Robust error handling with custom exceptions.
 - **Environment Flexibility:** Easily switch between local and cloud databases.
 - **Docker Support:** Optionally containerize your application for consistent deployment.
 - **Security:** Basic setup with room for adding Spring Security.
 
-> **Note:** This project is a work in progress. Additional features, improvements, and documentation will be added as development continues.
+> **Note:** This project is fully functional and deployed to AWS, but additional features and improvements may be added.
 
 ## Technologies Used
 
@@ -33,6 +35,8 @@ A comprehensive Spring Boot application for managing customer data, demonstratin
 - **Hibernate**
 - **Maven**
 - **Docker**
+- **Flyway**
+- **AWS Elastic Beanstalk**
 - **RESTful APIs**
 
 ## Setup and Installation
@@ -41,8 +45,9 @@ A comprehensive Spring Boot application for managing customer data, demonstratin
 
 - Java 17 or higher
 - Maven 3.6+
-- PostgreSQL
-- Docker (optional, for containerization)
+- PostgreSQL (for local database)
+- Docker
+- AWS Account (for cloud deployment)
 
 ### Installation Steps
 
@@ -71,6 +76,9 @@ A comprehensive Spring Boot application for managing customer data, demonstratin
    mvn spring-boot:run
 
 ## Running the Application
+
+- **API Live:**
+  - http://spring-boot-api-env.eba-zujs8n9m.ca-central-1.elasticbeanstalk.com/api/v1/customers
 
 - **Local Environment:**
   - Ensure PostgreSQL is running locally on the specified port.
@@ -115,3 +123,29 @@ A comprehensive Spring Boot application for managing customer data, demonstratin
      ```bash
      docker-compose up
      ```
+## Docker Integration
+
+1. **Docker Configuration:**
+   - The application has been containerized using Docker with the following setup:
+   ```yaml
+    services:
+     db:
+       image: postgres
+       environment:
+         POSTGRES_USER: kareemabdo
+         POSTGRES_PASSWORD: password
+       ports:
+         - "5332:5432"
+     app:
+       image: kareemabdose/spring-boot-example:latest
+       ports:
+         - "8095:8095"
+    ```
+2. **Running Docker Locally:**
+   -To run the application using Docker:
+   ```
+      docker-compose up
+   ```
+3.**Building Docker Image with Jib:**
+   -The Docker image is built using Jib and pushed to Docker Hub.
+   -Image Name: kareemabdose/spring-boot-example:latest
