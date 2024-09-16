@@ -73,4 +73,3 @@ jobs:
           git add ../Dockerrun.aws.json
           git commit -m "Update Dockerrun.aws.json docker image with new tag ${{ steps.build-number.outputs.BUILD_NUMBER }}"
           git push https://${{ secrets.PAT_TOKEN }}@github.com/KareemAbdoSE/Full-Stack-Developer-Project.git
-      
