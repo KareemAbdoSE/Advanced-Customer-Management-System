@@ -22,6 +22,9 @@ A comprehensive Spring Boot application for managing customer data, demonstratin
 - **Environment Flexibility:** Easily switch between local and cloud databases.
 - **Docker Support:** Optionally containerize your application for consistent deployment.
 - **Security:** Basic setup with room for adding Spring Security.
+- **CI/CD Pipeline:** Integrated with GitHub Actions for continuous integration and continuous deployment (CI/CD) to automatically build, test, and deploy the application.
+- **Slack Integration:** Slack notifications set up to report build and deployment statuses.
+- **React Frontend:** Built a frontend using React (Vite, Axios, and Chakra UI) to interact with the backend and display customer data.
 
 > **Note:** This project is fully functional and deployed to AWS, but additional features and improvements may be added.
 
@@ -38,6 +41,9 @@ A comprehensive Spring Boot application for managing customer data, demonstratin
 - **Flyway**
 - **AWS Elastic Beanstalk**
 - **RESTful APIs**
+- **GitHub Action**
+- **Slack**
+- **React**
 
 ## Setup and Installation
 
