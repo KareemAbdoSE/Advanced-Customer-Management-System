@@ -17,12 +17,12 @@ public class CustomerListDataAccessService implements CustomerDao {
         Customer alex = new Customer(1,
                 "kareem",
                 "kareemabdo@gmail.com",
-                21);
+                21, Gender.MALE);
 
         Customer alexa = new Customer(2,
                 "kareem",
                 "kareemabdo@gmail.com",
-                22);
+                22, Gender.MALE);
         customers.add(alex);
         customers.add(alexa);
 
