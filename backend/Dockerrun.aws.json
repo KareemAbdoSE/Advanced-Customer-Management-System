@@ -3,7 +3,7 @@
   "containerDefinitions": [
     {
       "name": "spring-boot-example",
-      "image": "kareemabdose/spring-boot-example:24.09.2024.16.22.12",
+      "image": "kareemabdose/spring-boot-example:24.09.2024.16.34.12",
       "essential": true,
       "memory": 512,
       "portMappings": [
