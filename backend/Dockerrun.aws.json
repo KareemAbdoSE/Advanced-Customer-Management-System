@@ -3,13 +3,13 @@
   "containerDefinitions": [
     {
       "name": "spring-boot-example",
-      "image": "kareemabdose/spring-boot-example:21.09.2024.17.31.17",
+      "image": "kareemabdose/spring-boot-example:latest",
       "essential": true,
       "memory": 512,
       "portMappings": [
         {
           "hostPort": 80,
-          "containerPort": 8095
+          "containerPort": 8080
         }
       ],
       "environment": [
