@@ -39,7 +39,7 @@ jobs:
           REPO=spring-boot-react \
           TAG=${{ steps.build-number.outputs.BUILD_NUMBER }} \
           ../../.ci/build-publish.sh . \
-            --build-arg api_base_url=http://spring-boot-api-env.eba-zujs8n9m.ca-central-1.elasticbeanstalk.com :8080
+            --build-arg api_base_url=http://spring-boot-api-env.eba-zujs8n9m.ca-central-1.elasticbeanstalk.com:8080
       - name: Send Slack Message
         run: >
           curl -X POST -H 'Content-type: application/json' 
