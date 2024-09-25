@@ -3,7 +3,7 @@
   "containerDefinitions": [
     {
       "name": "spring-boot-react",
-      "image": "kareemabdose/spring-boot-react:latest",
+      "image": "kareemabdose/spring-boot-react:25.09.2024.18.07.23",
       "essential": true,
       "memory": 256,
       "portMappings": [
