@@ -1,4 +1,4 @@
-package com.kareemabdo.Customer;
+package com.kareemabdo.customer;
 
 
 import org.junit.jupiter.api.Test;
@@ -27,7 +27,7 @@ class CustomerRowMapperTest {
 
         // Then
         Customer expected = new Customer(
-                1, "kareem", "kareem@gmail.com", 19,
+                1, "kareem", "kareem@gmail.com", "password", 19,
                 Gender.MALE);
         assertThat(actual).isEqualTo(expected);
     }

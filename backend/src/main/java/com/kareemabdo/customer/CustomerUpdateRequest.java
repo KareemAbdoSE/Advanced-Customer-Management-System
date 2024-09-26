@@ -1,5 +1,4 @@
-package com.kareemabdo.Customer;
-
+package com.kareemabdo.customer;
 
 public record CustomerUpdateRequest(
         String name,
