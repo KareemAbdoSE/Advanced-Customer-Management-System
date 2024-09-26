@@ -1,4 +1,4 @@
-package com.kareemabdo.Customer;
+package com.kareemabdo.customer;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -51,7 +51,7 @@ class CustomerJPADataAccessServiceTest {
     void insertCustomer() {
         // Given
         Customer customer = new Customer(
-                1, "Ali", "ali@gmail.com", 2,
+                1, "Ali", "ali@gmail.com", "password", 2,
                 Gender.MALE);
 
         // When
@@ -101,7 +101,7 @@ class CustomerJPADataAccessServiceTest {
     void updateCustomer() {
         // Given
         Customer customer = new Customer(
-                1, "Ali", "kareemabdoo@gmail.com", 2,
+                1, "Ali", "kareemabdoo@gmail.com", "password", 2,
                 Gender.MALE);
 
         // When

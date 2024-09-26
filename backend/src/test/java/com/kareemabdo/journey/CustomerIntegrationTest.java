@@ -1,12 +1,12 @@
 package com.kareemabdo.journey;
 
 
-import com.kareemabdo.Customer.Customer;
-import com.kareemabdo.Customer.CustomerRegistrationRequest;
-import com.kareemabdo.Customer.CustomerUpdateRequest;
+import com.kareemabdo.customer.Customer;
+import com.kareemabdo.customer.CustomerRegistrationRequest;
+import com.kareemabdo.customer.CustomerUpdateRequest;
 import com.github.javafaker.Faker;
 import com.github.javafaker.Name;
-import com.kareemabdo.Customer.Gender;
+import com.kareemabdo.customer.Gender;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,6 +14,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
+import org.springframework.security.test.context.support.WithMockUser;
 
 import java.util.List;
 import java.util.Random;
@@ -44,7 +45,7 @@ public class CustomerIntegrationTest {
         Gender gender = age % 2 == 0 ? Gender.MALE : Gender.FEMALE;
 
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
-                name, email, age,gender
+                name, email,"password", age,gender
         );
         // send a post request
         webTestClient.post()
@@ -70,7 +71,7 @@ public class CustomerIntegrationTest {
 
         // make sure that customer is present
         Customer expectedCustomer = new Customer(
-                name, email, age, gender);
+                name, email, "password",age, gender);
 
         assertThat(allCustomers)
                 .usingRecursiveFieldByFieldElementComparatorIgnoringFields("id")
@@ -109,7 +110,7 @@ public class CustomerIntegrationTest {
         Gender gender = age % 2 == 0 ? Gender.MALE : Gender.FEMALE;
 
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
-                name, email, age,gender
+                name, email,"password", age,gender
         );
 
         // send a post request
@@ -172,7 +173,7 @@ public class CustomerIntegrationTest {
         Gender gender = age % 2 == 0 ? Gender.MALE : Gender.FEMALE;
 
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
-                name, email, age,gender
+                name, email,"password", age,gender
         );
 
         // send a post request
@@ -233,7 +234,7 @@ public class CustomerIntegrationTest {
                 .getResponseBody();
 
         Customer expected = new Customer(
-                id, newName, email, age, gender);
+                id, newName, email,"password", age, gender);
 
         assertThat(updatedCustomer).isEqualTo(expected);
     }

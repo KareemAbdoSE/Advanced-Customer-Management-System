@@ -1,21 +1,30 @@
-package com.kareemabdo.Customer;
+package com.kareemabdo.customer;
+
 import com.kareemabdo.exception.DuplicateResourceException;
 import com.kareemabdo.exception.RequestValidationException;
 import com.kareemabdo.exception.ResourceNotFound;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class CustomerService {
+
     private final CustomerDao customerDao;
-    public CustomerService(@Qualifier("jdbc") CustomerDao customerDao) {
+    private final PasswordEncoder passwordEncoder;
+
+    public CustomerService(@Qualifier("jpa") CustomerDao customerDao,
+                           PasswordEncoder passwordEncoder) {
         this.customerDao = customerDao;
+        this.passwordEncoder = passwordEncoder;
     }
+
     public List<Customer> getAllCustomers() {
         return customerDao.selectAllCustomers();
     }
+
     public Customer getCustomer(Integer id) {
         return customerDao.selectCustomerById(id)
                 .orElseThrow(() -> new ResourceNotFound(
@@ -31,14 +40,18 @@ public class CustomerService {
                     "email already taken"
             );
         }
+
         // add
         Customer customer = new Customer(
                 customerRegistrationRequest.name(),
                 customerRegistrationRequest.email(),
+                passwordEncoder.encode(customerRegistrationRequest.password()),
                 customerRegistrationRequest.age(),
                 customerRegistrationRequest.gender());
+
         customerDao.insertCustomer(customer);
     }
+
     public void deleteCustomerById(Integer customerId) {
         if (!customerDao.existsCustomerById(customerId)) {
             throw new ResourceNotFound(
