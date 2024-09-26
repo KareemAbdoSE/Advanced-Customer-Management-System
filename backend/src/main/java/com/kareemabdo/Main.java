@@ -35,7 +35,7 @@ public class Main {
             Gender gender = age % 2 == 0 ? Gender.MALE : Gender.FEMALE;
             Customer customer = new Customer(
                     firstName +  " " + lastName,
-                    firstName.toLowerCase() + "." + lastName.toLowerCase() + "@amigoscode.com",
+                    firstName.toLowerCase() + "." + lastName.toLowerCase() + "@kareemabdo.com",
                     passwordEncoder.encode(UUID.randomUUID().toString()),
                     age,
                     gender);
