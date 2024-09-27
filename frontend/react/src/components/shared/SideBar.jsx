@@ -90,7 +90,7 @@ const SidebarContent = ({onClose, ...rest}) => {
                 <Image
                     borderRadius='full'
                     boxSize='75px'
-                    src=''
+                    src='https://github.com/KareemAbdoSE/Full-Stack-Developer-Project/blob/main/KAlogo.png?raw=true'
                     alt='KareemAbdo'
                 />
                 <CloseButton display={{base: 'flex', md: 'none'}} onClick={onClose}/>
