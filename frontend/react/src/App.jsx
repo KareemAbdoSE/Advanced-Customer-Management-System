@@ -7,8 +7,9 @@ import {
 import SidebarWithHeader from "./components/shared/SideBar.jsx";
 import { useEffect, useState } from 'react';
 import { getCustomers } from "./services/client.js";
-import CardWithImage from "./components/CustomerCard.jsx";
 import CreateCustomerDrawer from "./components/customer/CreateCustomerDrawer.jsx";
+import CardWithImage from "./components/customer/CustomerCard.jsx";
+
 
 
 const App = () => {
