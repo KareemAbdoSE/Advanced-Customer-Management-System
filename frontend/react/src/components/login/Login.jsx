@@ -18,6 +18,7 @@ import {useAuth} from "../context/AuthContext.jsx";
 import {errorNotification} from "../../services/notification.js";
 import {useNavigate} from "react-router-dom";
 import {useEffect} from "react";
+
 const MyTextInput = ({label, ...props}) => {
     // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
     // which we can spread on <input>. We can use field meta to show an error
