@@ -15,7 +15,7 @@
     },
     {
       "name": "spring-boot-example",
-      "image": "kareemabdose/spring-boot-example:27.09.2024.17.24.41",
+      "image": "kareemabdose/spring-boot-example:28.09.2024.16.13.12",
       "essential": true,
       "memory": 512,
       "portMappings": [
