@@ -5,6 +5,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+// This class implements CustomerDao using JPA for database access.
+// It delegates the CRUD operations to the CustomerRepository, which interacts with the database.
+
+
 @Repository("jpa")
 public class CustomerJPADataAccessService implements CustomerDao {
 

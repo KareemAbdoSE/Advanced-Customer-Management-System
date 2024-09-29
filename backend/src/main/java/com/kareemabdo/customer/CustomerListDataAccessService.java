@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+// This class implements CustomerDao using an in-memory list to simulate a database.
+// It provides CRUD operations for customer data, storing customers in a static list.
+
 @Repository("list")
 public class CustomerListDataAccessService implements CustomerDao {
 

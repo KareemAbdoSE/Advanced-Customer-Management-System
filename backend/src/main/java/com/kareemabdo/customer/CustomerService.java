@@ -6,9 +6,11 @@ import com.kareemabdo.exception.ResourceNotFound;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.stream.Collectors;
+
+// This service class handles the business logic for customer operations.
+// It provides methods to get, add, update, and delete customers, while handling validation and exceptions.
 
 @Service
 public class CustomerService {

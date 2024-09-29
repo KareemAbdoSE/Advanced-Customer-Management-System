@@ -5,14 +5,15 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Service;
-
 import java.security.Key;
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
 import static java.time.temporal.ChronoUnit.DAYS;
+
+// This utility class handles JWT operations like issuing tokens, validating them,
+// and extracting claims such as the subject (username). It uses HMAC with SHA-256 for signing the tokens.
 
 @Service
 public class JWTUtil {
