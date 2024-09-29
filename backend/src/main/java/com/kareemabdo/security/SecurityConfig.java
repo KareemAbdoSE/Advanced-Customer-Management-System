@@ -14,6 +14,10 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Arrays;
 
+// This class provides security-related bean configurations, including password encoding,
+// the authentication manager, and the authentication provider, which uses BCrypt for password encoding.
+
+
 @Configuration
 public class SecurityConfig {
 

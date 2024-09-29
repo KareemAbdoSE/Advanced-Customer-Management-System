@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+// This class implements CustomerDao using JDBC for database access.
+// It provides methods to perform CRUD operations on the 'customer' table using JdbcTemplate.
+
 @Repository("jdbc")
 public class CustomerJDBCDataAccessService implements CustomerDao {
 

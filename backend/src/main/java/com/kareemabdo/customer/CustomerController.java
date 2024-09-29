@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+// This class defines a REST controller that handles CRUD operations for customers.
+// It provides endpoints to get, register, update, and delete customers, while issuing JWT tokens for authentication.
+
 @RestController
 @RequestMapping("api/v1/customers")
 public class CustomerController {

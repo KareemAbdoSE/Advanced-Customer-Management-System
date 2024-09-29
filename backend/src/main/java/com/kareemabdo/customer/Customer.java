@@ -11,6 +11,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
+// This class represents a customer entity, implements security stuff like UserDetails,
+// and maps to a 'customer' table in the database. Handles user info like name, email, password, and more.
+
 @Entity
 @Table(
         name = "customer",

@@ -14,6 +14,9 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+// This class configures security for the application, enabling JWT-based authentication.
+// It sets up the security filter chain to handle authentication and authorization, disables CSRF, allows some public endpoints, and manages sessions as stateless.
+
 @Configuration
 @EnableWebSecurity
 public class SecurityFilterChainConfig {
