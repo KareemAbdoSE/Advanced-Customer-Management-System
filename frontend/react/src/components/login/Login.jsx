@@ -129,14 +129,14 @@ const Login = () => {
             >
                 <Text fontSize={"6xl"} color={'white'} fontWeight={"bold"} mb={5}>
                     <Link target={"_blank"} href={""}>
-                        Enrol Now
+                        Enroll Now
                     </Link>
                 </Text>
                 <Image
                     alt={'Login Image'}
                     objectFit={'scale-down'}
                     src={
-                        ''
+                        'https://github.com/KareemAbdoSE/Full-Stack-Developer-Project/blob/main/360_F_484715376_pCo8IDssiqYuBSnlGGM36LF8d0T8z6iI.jpg?raw=true'
                     }
                 />
             </Flex>
