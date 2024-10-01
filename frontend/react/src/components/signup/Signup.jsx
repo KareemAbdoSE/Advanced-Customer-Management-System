@@ -49,7 +49,7 @@ const Signup = () => {
                     alt={'Login Image'}
                     objectFit={'scale-down'}
                     src={
-                        'https://github.com/KareemAbdoSE/Full-Stack-Developer-Project/blob/main/360_F_484715376_pCo8IDssiqYuBSnlGGM36LF8d0T8z6iI.jpg?raw=true'
+                        'https://github.com/KareemAbdoSE/Full-Stack-Developer-Project/blob/main/%E2%80%94Pngtree%E2%80%94enroll%20now%20banner%20png%20image_8330526.png?raw=true'
                     }
                 />
             </Flex>
