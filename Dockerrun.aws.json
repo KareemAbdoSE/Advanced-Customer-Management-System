@@ -2,6 +2,7 @@
   "AWSEBDockerrunVersion": 2,
   "containerDefinitions": [
     {
+<<<<<<< Updated upstream
       "name": "spring-boot-react",
       "image": "kareemabdose/spring-boot-react:01.10.2024.15.34.29",
       "essential": true,
@@ -14,20 +15,22 @@
       ]
     },
     {
+=======
+>>>>>>> Stashed changes
       "name": "spring-boot-example",
       "image": "kareemabdose/spring-boot-example:29.09.2024.17.39.17",
       "essential": true,
       "memory": 512,
       "portMappings": [
         {
-          "hostPort": 8080,
+          "hostPort": 80,
           "containerPort": 8095
         }
       ],
       "environment": [
         {
           "name": "SPRING_DATASOURCE_URL",
-          "value": "jdbc:postgresql://awseb-e-c2v3kdfiqx-stack-awsebrdsdatabase-jifj615huefs.ct0okac4g378.ca-central-1.rds.amazonaws.com:5432/customer"
+          "value": "awseb-e-ppmwsmxjyj-stack-awsebrdsdatabase-zuxpl5bvragd.ct0okac4g378.ca-central-1.rds.amazonaws.com:5432/ebdb"
         }
       ]
     }
