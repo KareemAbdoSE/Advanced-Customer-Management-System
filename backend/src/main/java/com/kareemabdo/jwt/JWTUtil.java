@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import static java.time.temporal.ChronoUnit.DAYS;
 
-// This utility class handles JWT operations like issuing tokens, validating them,
+// This utility class handles JWT operations like issuing tokens, validating them,  
 // and extracting claims such as the subject (username). It uses HMAC with SHA-256 for signing the tokens.
 
 @Service
