@@ -2,21 +2,6 @@
   "AWSEBDockerrunVersion": 2,
   "containerDefinitions": [
     {
-<<<<<<< Updated upstream
-      "name": "spring-boot-react",
-      "image": "kareemabdose/spring-boot-react:01.10.2024.15.34.29",
-      "essential": true,
-      "memory": 256,
-      "portMappings": [
-        {
-          "hostPort": 80,
-          "containerPort": 5173
-        }
-      ]
-    },
-    {
-=======
->>>>>>> Stashed changes
       "name": "spring-boot-example",
       "image": "kareemabdose/spring-boot-example:29.09.2024.17.39.17",
       "essential": true,
