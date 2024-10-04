@@ -12,7 +12,7 @@ import CardWithImage from "./components/customer/CustomerCard.jsx";
 
 
 
-const App = () => {
+const Customer = () => {
 
     const [customers, setCustomers] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -94,4 +94,4 @@ const App = () => {
     )
 }
 
-export default App;
+export default Customer;
