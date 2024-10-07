@@ -8,7 +8,7 @@ A comprehensive Spring Boot application for managing customer data, demonstratin
 3. [Setup and Installation](#setup-and-installation)
 4. [Running the Application](#running-the-application)
 5. [Database Configuration](#database-configuration)
-6. [Deploying to Cloud](#deploying-to-cloud)
+6. [Deploying to AWS Elastic Beanstalk](#Deploying-to-AWS-Elastic-Beanstalk)
 7. [Docker Integration](#docker-integration)
 
 ## Features
@@ -25,6 +25,7 @@ A comprehensive Spring Boot application for managing customer data, demonstratin
 - **CI/CD Pipeline:** Integrated with GitHub Actions for continuous integration and continuous deployment (CI/CD) to automatically build, test, and deploy the application.
 - **Slack Integration:** Slack notifications set up to report build and deployment statuses.
 - **React Frontend:** Built a frontend using React (Vite, Axios, and Chakra UI) to interact with the backend and display customer data.
+- **Domain and SSL/TLS Support:** Configured with AWS Route 53 and AWS Certificate Manager for custom domain management and secure HTTPS connections via SSL/TLS.
 
 > **Note:** This project is fully functional and deployed to AWS, but additional features and improvements may be added.
 
@@ -44,6 +45,9 @@ A comprehensive Spring Boot application for managing customer data, demonstratin
 - **GitHub Action**
 - **Slack**
 - **React**
+- **AWS Route 53**
+- **AWS Certificate Manager**
+- **SSL/TLS**
 
 ## Setup and Installation
 
@@ -111,24 +115,111 @@ A comprehensive Spring Boot application for managing customer data, demonstratin
         username: cloud_user
         password: cloud_password
     ```
-## Deploying to Cloud
+## Deploying to AWS Elastic Beanstalk
+You can deploy this application to AWS Elastic Beanstalk using Docker. All you need to do is upload the Dockerrun.aws.json file and adjust the database configuration to point to your own database.
 
-1. **Update `application.yaml`:**
-   - Modify the `datasource.url`, `username`, and `password` to point to your cloud database.
+### Prerequisites
+- AWS Account: Ensure you have an AWS account with necessary permissions.
+- AWS CLI: Installed and configured with your AWS credentials.
+- Docker Hub Account: For hosting your Docker image.
+- PostgreSQL Database: Set up an AWS RDS instance or any accessible PostgreSQL database.
 
-2. **Deploy the Application:**
-   - Deploy using your preferred cloud provider (e.g., AWS, Azure, GCP).
-   - Ensure the cloud environment is set up with the correct database and environment variables.
+### Steps to Deploy
+1. **Set Up Your PostgreSQL Database**
+-Create a PostgreSQL database instance (e.g., AWS RDS).
+-Note the database endpoint, port, database name, username, and password.
 
-3. **Docker Option:**
-   - If using Docker, build the Docker image:
-     ```bash
-     docker build -t customer-management-system .
-     ```
-   - Run the Docker container:
-     ```bash
-     docker-compose up
-     ```
+2. **Modify the Database Configuration**
+
+Update your application.yaml or use environment variables.
+Using application.yaml:
+yaml
+Copy code
+spring:
+  datasource:
+    url: jdbc:postgresql://your-db-endpoint:5432/your-db-name
+    username: your-db-username
+    password: your-db-password
+Recommended: Use environment variables to avoid hardcoding credentials.
+
+3. **Prepare the Dockerrun.aws.json File**
+
+Ensure the Dockerrun.aws.json file is at the root of your project.
+Example Dockerrun.aws.json:
+json
+Copy code
+{
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
+    "Name": "your-dockerhub-username/customer-management-system:latest",
+    "Update": "true"
+  },
+  "Ports": [
+    {
+      "ContainerPort": "8095"
+    }
+  ]
+}
+Replace your-dockerhub-username/customer-management-system:latest with your actual Docker image name.
+
+4. **Build and Push Docker Image**
+
+Build the Docker image:
+bash
+Copy code
+docker build -t your-dockerhub-username/customer-management-system:latest .
+Push the image to Docker Hub:
+bash
+Copy code
+docker push your-dockerhub-username/customer-management-system:latest
+
+5. **Create an Elastic Beanstalk Application**
+
+Log in to the AWS Management Console.
+Navigate to AWS Elastic Beanstalk.
+Click on Create Application.
+Application Name: Enter a name for your application.
+Platform: Select Docker.
+Application Code: Choose Upload your code and upload the Dockerrun.aws.json file.
+
+6. **Configure Environment Settings**
+
+Environment Properties: Add environment variables for sensitive data.
+Example:
+SPRING_DATASOURCE_URL: jdbc:postgresql://your-db-endpoint:5432/your-db-name
+SPRING_DATASOURCE_USERNAME: your-db-username
+SPRING_DATASOURCE_PASSWORD: your-db-password
+Load Balancer Settings: Elastic Beanstalk uses an Application Load Balancer (ALB) by default.
+Port Configuration:
+Listener Port: 80 (HTTP)
+Protocol: HTTP
+Forward to: 8095 (Container Port)
+Health Check Path: Set to /actuator/health or any endpoint that returns a 200 status code.
+Instance Type: Choose an appropriate EC2 instance type (e.g., t2.micro).
+
+7. **Security Group Configuration**
+
+Ensure that the security group allows inbound traffic on port 80 (HTTP).
+If using HTTPS, configure SSL certificates and allow port 443.
+
+8. **Create the Environment**
+
+Review all settings.
+Click Create Environment.
+Wait for the environment to be set up and the application to be deployed.
+
+9. **Access Your Application**
+
+Once deployed, access the application via the environment URL provided by Elastic Beanstalk.
+Example: http://your-environment.elasticbeanstalk.com/api/v1/customers
+
+Important Notes
+Database Connectivity: Ensure that the database security group allows inbound traffic from the Elastic Beanstalk instances.
+Environment Variables: Using environment variables for sensitive information enhances security and flexibility.
+Load Balancer Configuration: Elastic Beanstalk sets up a load balancer for you. If you need to customize it (e.g., for SSL termination), you can modify settings in the AWS Console.
+Scaling: Elastic Beanstalk can automatically scale your application based on demand. Configure autoscaling policies if needed.
+Monitoring: Utilize AWS CloudWatch for monitoring application logs and performance metrics.
+
 ## Docker Integration
 
 1. **Docker Configuration:**
