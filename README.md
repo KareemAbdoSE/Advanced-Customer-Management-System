@@ -59,7 +59,7 @@ A comprehensive Spring Boot application for managing customer data, demonstratin
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/customer-management-system.git
+   git clone https://github.com/KareemAbdoSE/Full-Stack-Developer-Project.git
    cd customer-management-system
 2. **Choose Data Access Method:**
    - **JPA:** By default, the application is configured to use JPA.
