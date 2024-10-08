@@ -1,2 +1,7 @@
-<h1>Loading Advanced Customer Management Website...</h1>
+<h1>Loading Advanced Customer Management Website... {{clickCount}}</h1>
+
+<app-my-first
+[inputValue]="'KareemAbdoSE'"
+(childClicked)="handleChildClick()"
+></app-my-first>
 <router-outlet></router-outlet>
