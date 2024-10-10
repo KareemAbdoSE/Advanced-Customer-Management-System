@@ -125,100 +125,96 @@ You can deploy this application to AWS Elastic Beanstalk using Docker. All you n
 - PostgreSQL Database: Set up an AWS RDS instance or any accessible PostgreSQL database.
 
 ### Steps to Deploy
+
 1. **Set Up Your PostgreSQL Database**
--Create a PostgreSQL database instance (e.g., AWS RDS).
--Note the database endpoint, port, database name, username, and password.
+   - Create a PostgreSQL database instance (e.g., AWS RDS).
+   - Note the database endpoint, port, database name, username, and password.
 
 2. **Modify the Database Configuration**
-
-Update your application.yaml or use environment variables.
-Using application.yaml:
-yaml
-Copy code
-spring:
-  datasource:
-    url: jdbc:postgresql://your-db-endpoint:5432/your-db-name
-    username: your-db-username
-    password: your-db-password
-Recommended: Use environment variables to avoid hardcoding credentials.
+   - Update your `application.yaml` or use environment variables.
+   - Using `application.yaml`:
+    ```yaml
+    spring:
+      datasource:
+        url: jdbc:postgresql://your-db-endpoint:5432/your-db-name
+        username: your-db-username
+        password: your-db-password
+    ```
+   - Recommended: Use environment variables to avoid hardcoding credentials.
 
 3. **Prepare the Dockerrun.aws.json File**
-
-Ensure the Dockerrun.aws.json file is at the root of your project.
-Example Dockerrun.aws.json:
-json
-Copy code
-{
-  "AWSEBDockerrunVersion": "1",
-  "Image": {
-    "Name": "your-dockerhub-username/customer-management-system:latest",
-    "Update": "true"
-  },
-  "Ports": [
+   - Ensure the `Dockerrun.aws.json` file is at the root of your project.
+   
+   Example `Dockerrun.aws.json`:
+    ```json
     {
-      "ContainerPort": "8095"
+      "AWSEBDockerrunVersion": "1",
+      "Image": {
+        "Name": "your-dockerhub-username/customer-management-system:latest",
+        "Update": "true"
+      },
+      "Ports": [
+        {
+          "ContainerPort": "8095"
+        }
+      ]
     }
-  ]
-}
-Replace your-dockerhub-username/customer-management-system:latest with your actual Docker image name.
+    ```
+
+   Replace `your-dockerhub-username/customer-management-system:latest` with your actual Docker image name.
 
 4. **Build and Push Docker Image**
-
-Build the Docker image:
-bash
-Copy code
-docker build -t your-dockerhub-username/customer-management-system:latest .
-Push the image to Docker Hub:
-bash
-Copy code
-docker push your-dockerhub-username/customer-management-system:latest
+   - Build the Docker image:
+    ```bash
+    docker build -t your-dockerhub-username/customer-management-system:latest .
+    ```
+   - Push the image to Docker Hub:
+    ```bash
+    docker push your-dockerhub-username/customer-management-system:latest
+    ```
 
 5. **Create an Elastic Beanstalk Application**
-
-Log in to the AWS Management Console.
-Navigate to AWS Elastic Beanstalk.
-Click on Create Application.
-Application Name: Enter a name for your application.
-Platform: Select Docker.
-Application Code: Choose Upload your code and upload the Dockerrun.aws.json file.
+   - Log in to the AWS Management Console.
+   - Navigate to AWS Elastic Beanstalk.
+   - Click on **Create Application**.
+   - **Application Name**: Enter a name for your application.
+   - **Platform**: Select Docker.
+   - **Application Code**: Choose **Upload your code** and upload the `Dockerrun.aws.json` file.
 
 6. **Configure Environment Settings**
-
-Environment Properties: Add environment variables for sensitive data.
-Example:
-SPRING_DATASOURCE_URL: jdbc:postgresql://your-db-endpoint:5432/your-db-name
-SPRING_DATASOURCE_USERNAME: your-db-username
-SPRING_DATASOURCE_PASSWORD: your-db-password
-Load Balancer Settings: Elastic Beanstalk uses an Application Load Balancer (ALB) by default.
-Port Configuration:
-Listener Port: 80 (HTTP)
-Protocol: HTTP
-Forward to: 8095 (Container Port)
-Health Check Path: Set to /actuator/health or any endpoint that returns a 200 status code.
-Instance Type: Choose an appropriate EC2 instance type (e.g., t2.micro).
+   - **Environment Properties**: Add environment variables for sensitive data.
+     Example:
+    ```bash
+    SPRING_DATASOURCE_URL: jdbc:postgresql://your-db-endpoint:5432/your-db-name
+    SPRING_DATASOURCE_USERNAME: your-db-username
+    SPRING_DATASOURCE_PASSWORD: your-db-password
+    ```
+   - **Load Balancer Settings**: Elastic Beanstalk uses an Application Load Balancer (ALB) by default.
+   - **Port Configuration**:
+     - Listener Port: 80 (HTTP)
+     - Protocol: HTTP
+     - Forward to: 8095 (Container Port)
+     - Health Check Path: Set to `/actuator/health` or any endpoint that returns a 200 status code.
+   - **Instance Type**: Choose an appropriate EC2 instance type (e.g., `t2.micro`).
 
 7. **Security Group Configuration**
-
-Ensure that the security group allows inbound traffic on port 80 (HTTP).
-If using HTTPS, configure SSL certificates and allow port 443.
+   - Ensure that the security group allows inbound traffic on port 80 (HTTP). If using HTTPS, configure SSL certificates and allow port 443.
 
 8. **Create the Environment**
-
-Review all settings.
-Click Create Environment.
-Wait for the environment to be set up and the application to be deployed.
+   - Review all settings.
+   - Click **Create Environment**.
+   - Wait for the environment to be set up and the application to be deployed.
 
 9. **Access Your Application**
+   - Once deployed, access the application via the environment URL provided by Elastic Beanstalk. 
+   - Example: `http://your-environment.elasticbeanstalk.com/api/v1/customers`
 
-Once deployed, access the application via the environment URL provided by Elastic Beanstalk.
-Example: http://your-environment.elasticbeanstalk.com/api/v1/customers
-
-Important Notes
-Database Connectivity: Ensure that the database security group allows inbound traffic from the Elastic Beanstalk instances.
-Environment Variables: Using environment variables for sensitive information enhances security and flexibility.
-Load Balancer Configuration: Elastic Beanstalk sets up a load balancer for you. If you need to customize it (e.g., for SSL termination), you can modify settings in the AWS Console.
-Scaling: Elastic Beanstalk can automatically scale your application based on demand. Configure autoscaling policies if needed.
-Monitoring: Utilize AWS CloudWatch for monitoring application logs and performance metrics.
+## Important Notes
+- **Database Connectivity**: Ensure that the database security group allows inbound traffic from the Elastic Beanstalk instances.
+- **Environment Variables**: Using environment variables for sensitive information enhances security and flexibility.
+- **Load Balancer Configuration**: Elastic Beanstalk sets up a load balancer for you. If you need to customize it (e.g., for SSL termination), you can modify settings in the AWS Console.
+- **Scaling**: Elastic Beanstalk can automatically scale your application based on demand. Configure autoscaling policies if needed.
+- **Monitoring**: Utilize AWS CloudWatch for monitoring application logs and performance metrics.
 
 ## Docker Integration
 
