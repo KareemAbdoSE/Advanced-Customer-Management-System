@@ -4,6 +4,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 // This class implements CustomerDao using JPA for database access.
 // It delegates the CRUD operations to the CustomerRepository, which interacts with the database.
@@ -20,7 +22,8 @@ public class CustomerJPADataAccessService implements CustomerDao {
 
     @Override
     public List<Customer> selectAllCustomers() {
-        return customerRepository.findAll();
+        Page<Customer> page = customerRepository.findAll(Pageable.ofSize(1000));
+        return page.getContent();
     }
 
     @Override
