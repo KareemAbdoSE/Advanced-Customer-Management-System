@@ -88,7 +88,7 @@ A comprehensive Spring Boot application for managing customer data, demonstratin
 ## Running the Application
 
 - **API Live:**
-  - http://spring-boot-api-env.eba-zujs8n9m.ca-central-1.elasticbeanstalk.com/api/v1/customers
+  - https://customer-api.kareemabdose.com
 
 - **Local Environment:**
   - Ensure PostgreSQL is running locally on the specified port.
