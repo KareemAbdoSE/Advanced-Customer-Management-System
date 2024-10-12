@@ -45,6 +45,7 @@ A comprehensive Spring Boot application for managing customer data, demonstratin
 - **GitHub Action**
 - **Slack**
 - **React**
+- **Angular**
 - **AWS Route 53**
 - **AWS Certificate Manager**
 - **SSL/TLS**
