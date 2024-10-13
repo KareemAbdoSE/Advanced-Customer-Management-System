@@ -23,6 +23,8 @@ import { HttpInterceptorService } from './services/interceptor/http-interceptor.
 import { CustomerCardComponent } from './components/customer-card/customer-card.component';
 import { CardModule } from 'primeng/card';
 import { BadgeModule } from 'primeng/badge';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -49,14 +51,16 @@ import { BadgeModule } from 'primeng/badge';
     HttpClientModule,
     MessageModule,
     CardModule,
-    BadgeModule
+    BadgeModule,
+    ToastModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpInterceptorService,
       multi: true
-    }
+    },
+    MessageService
   ],
   bootstrap: [AppComponent]
 })
