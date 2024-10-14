@@ -24,7 +24,8 @@ import { CustomerCardComponent } from './components/customer-card/customer-card.
 import { CardModule } from 'primeng/card';
 import { BadgeModule } from 'primeng/badge';
 import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { MessageService } from 'primeng/api';
     MessageModule,
     CardModule,
     BadgeModule,
-    ToastModule
+    ToastModule,
+    ConfirmDialogModule
   ],
   providers: [
     {
@@ -60,7 +62,8 @@ import { MessageService } from 'primeng/api';
       useClass: HttpInterceptorService,
       multi: true
     },
-    MessageService
+    MessageService,
+    ConfirmationService
   ],
   bootstrap: [AppComponent]
 })
