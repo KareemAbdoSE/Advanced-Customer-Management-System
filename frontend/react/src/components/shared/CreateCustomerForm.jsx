@@ -1,21 +1,20 @@
-import {Form, Formik, useField} from 'formik';
+// Form component for creating a new customer with validation
+import { Form, Formik, useField } from 'formik';
 import * as Yup from 'yup';
-import {Alert, AlertIcon, Box, Button, FormLabel, Input, Select, Stack} from "@chakra-ui/react";
-import {saveCustomer} from "../../services/client.js";
-import {successNotification, errorNotification} from "../../services/notification.js";
+import { Alert, AlertIcon, Box, Button, FormLabel, Input, Select, Stack } from "@chakra-ui/react";
+import { saveCustomer } from "../../services/client.js";
+import { successNotification, errorNotification } from "../../services/notification.js";
 
-const MyTextInput = ({label, ...props}) => {
-    // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
-    // which we can spread on <input>. We can use field meta to show an error
-    // message if the field is invalid and it has been touched (i.e. visited)
+// Custom input component with error handling
+const MyTextInput = ({ label, ...props }) => {
     const [field, meta] = useField(props);
     return (
         <Box>
-            <FormLabel htmlFor={props.id || props.name}>{label}</FormLabel>
-            <Input className="text-input" {...field} {...props} />
+            <FormLabel>{label}</FormLabel>
+            <Input {...field} {...props} />
             {meta.touched && meta.error ? (
-                <Alert className="error" status={"error"} mt={2}>
-                    <AlertIcon/>
+                <Alert status={"error"} mt={2}>
+                    <AlertIcon />
                     {meta.error}
                 </Alert>
             ) : null}
@@ -23,15 +22,16 @@ const MyTextInput = ({label, ...props}) => {
     );
 };
 
-const MySelect = ({label, ...props}) => {
+// Custom select component with error handling
+const MySelect = ({ label, ...props }) => {
     const [field, meta] = useField(props);
     return (
         <Box>
-            <FormLabel htmlFor={props.id || props.name}>{label}</FormLabel>
+            <FormLabel>{label}</FormLabel>
             <Select {...field} {...props} />
             {meta.touched && meta.error ? (
-                <Alert className="error" status={"error"} mt={2}>
-                    <AlertIcon/>
+                <Alert status={"error"} mt={2}>
+                    <AlertIcon />
                     {meta.error}
                 </Alert>
             ) : null}
@@ -39,7 +39,7 @@ const MySelect = ({label, ...props}) => {
     );
 };
 
-// And now we can use these
+// Formik form for creating a new customer
 const CreateCustomerForm = ({ onSuccess }) => {
     return (
         <>
@@ -56,45 +56,42 @@ const CreateCustomerForm = ({ onSuccess }) => {
                         .max(15, 'Must be 15 characters or less')
                         .required('Required'),
                     email: Yup.string()
-                        .email('Must be 20 characters or less')
+                        .email('Invalid email address')
                         .required('Required'),
                     age: Yup.number()
                         .min(16, 'Must be at least 16 years of age')
                         .max(100, 'Must be less than 100 years of age')
-                        .required(),
+                        .required('Required'),
                     password: Yup.string()
                         .min(4, 'Must be 4 characters or more')
                         .max(15, 'Must be 15 characters or less')
                         .required('Required'),
                     gender: Yup.string()
-                        .oneOf(
-                            ['MALE', 'FEMALE'],
-                            'Invalid gender'
-                        )
+                        .oneOf(['MALE', 'FEMALE'], 'Invalid gender')
                         .required('Required'),
                 })}
-                onSubmit={(customer, {setSubmitting}) => {
+                onSubmit={(customer, { setSubmitting }) => {
                     setSubmitting(true);
                     saveCustomer(customer)
                         .then(res => {
-                            console.log(res);
                             successNotification(
                                 "Customer saved",
                                 `${customer.name} was successfully saved`
-                            )
+                            );
                             onSuccess(res.headers["authorization"]);
-                        }).catch(err => {
-                        console.log(err);
-                        errorNotification(
-                            err.code,
-                            err.response.data.message
-                        )
-                    }).finally(() => {
-                        setSubmitting(false);
-                    })
+                        })
+                        .catch(err => {
+                            errorNotification(
+                                err.code,
+                                err.response.data.message
+                            );
+                        })
+                        .finally(() => {
+                            setSubmitting(false);
+                        });
                 }}
             >
-                {({isValid, isSubmitting}) => (
+                {({ isValid, isSubmitting }) => (
                     <Form>
                         <Stack spacing={"24px"}>
                             <MyTextInput
@@ -108,7 +105,7 @@ const CreateCustomerForm = ({ onSuccess }) => {
                                 label="Email Address"
                                 name="email"
                                 type="email"
-                                placeholder="jane@formik.com"
+                                placeholder="jane@example.com"
                             />
 
                             <MyTextInput
@@ -122,7 +119,7 @@ const CreateCustomerForm = ({ onSuccess }) => {
                                 label="Password"
                                 name="password"
                                 type="password"
-                                placeholder={"pick a secure password"}
+                                placeholder="Pick a secure password"
                             />
 
                             <MySelect label="Gender" name="gender">
@@ -131,7 +128,12 @@ const CreateCustomerForm = ({ onSuccess }) => {
                                 <option value="FEMALE">Female</option>
                             </MySelect>
 
-                            <Button disabled={!isValid || isSubmitting} type="submit">Submit</Button>
+                            <Button
+                                disabled={!isValid || isSubmitting}
+                                type="submit"
+                            >
+                                Submit
+                            </Button>
                         </Stack>
                     </Form>
                 )}

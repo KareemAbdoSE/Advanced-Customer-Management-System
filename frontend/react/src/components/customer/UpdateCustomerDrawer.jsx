@@ -1,3 +1,4 @@
+// Drawer component that contains the form to update customer information
 import {
     Button,
     Drawer,

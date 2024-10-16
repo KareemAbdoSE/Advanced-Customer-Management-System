@@ -1,3 +1,5 @@
+// Environment configuration for production
+
 export const environment = {
   api: {
     baseUrl: 'http://localhost:8080',

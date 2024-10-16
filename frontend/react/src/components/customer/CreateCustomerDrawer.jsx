@@ -1,3 +1,4 @@
+// Drawer component that contains the form to create a new customer
 import {
     Button,
     Drawer,

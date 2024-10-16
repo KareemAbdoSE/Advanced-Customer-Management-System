@@ -1,3 +1,5 @@
+// Component for the header bar, showing user info and a dropdown menu
+
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 
@@ -8,21 +10,9 @@ import { MenuItem } from 'primeng/api';
 })
 export class HeaderBarComponent {
   items: Array<MenuItem> = [
-    {
-      label: 'Profile',
-      icon: 'pi pi-user'
-    },
-    {
-      label: 'Settings',
-      icon: 'pi pi-cog'
-    },
-    {
-      separator: true
-    },
-    {
-      label: 'Sign out',
-      icon: 'pi pi-sign-out'
-    },
+    { label: 'Profile', icon: 'pi pi-user' },
+    { label: 'Settings', icon: 'pi pi-cog' },
+    { separator: true },
+    { label: 'Sign out', icon: 'pi pi-sign-out' }
   ];
-
 }

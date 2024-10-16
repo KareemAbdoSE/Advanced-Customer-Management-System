@@ -1,3 +1,5 @@
+// Defines routes for the application and applies guards
+
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CustomerComponent } from './components/customer/customer.component';

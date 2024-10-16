@@ -1,5 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+// Test suite for the CustomerComponent
 
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CustomerComponent } from './customer.component';
 
 describe('CustomerComponent', () => {

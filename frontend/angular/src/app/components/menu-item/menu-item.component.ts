@@ -1,3 +1,5 @@
+// Component representing an individual menu item
+
 import { Component, Input } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 
@@ -7,7 +9,6 @@ import { MenuItem } from 'primeng/api';
   styleUrls: ['./menu-item.component.scss']
 })
 export class MenuItemComponent {
-
   @Input()
   menuItem: MenuItem = {};
 }
