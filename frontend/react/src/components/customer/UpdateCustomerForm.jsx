@@ -1,21 +1,20 @@
-import {Form, Formik, useField} from 'formik';
+// Form component for updating customer details with validation
+import { Form, Formik, useField } from 'formik';
 import * as Yup from 'yup';
-import {Alert, AlertIcon, Box, Button, FormLabel, Input, Select, Stack} from "@chakra-ui/react";
-import {saveCustomer, updateCustomer} from "../../services/client.js";
-import {successNotification, errorNotification} from "../../services/notification.js";
+import { Alert, AlertIcon, Box, Button, FormLabel, Input, Stack } from "@chakra-ui/react";
+import { updateCustomer } from "../../services/client.js";
+import { successNotification, errorNotification } from "../../services/notification.js";
 
-const MyTextInput = ({label, ...props}) => {
-    // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
-    // which we can spread on <input>. We can use field meta to show an error
-    // message if the field is invalid and it has been touched (i.e. visited)
+// Custom input component with error handling
+const MyTextInput = ({ label, ...props }) => {
     const [field, meta] = useField(props);
     return (
         <Box>
-            <FormLabel htmlFor={props.id || props.name}>{label}</FormLabel>
-            <Input className="text-input" {...field} {...props} />
+            <FormLabel>{label}</FormLabel>
+            <Input {...field} {...props} />
             {meta.touched && meta.error ? (
-                <Alert className="error" status={"error"} mt={2}>
-                    <AlertIcon/>
+                <Alert status={"error"} mt={2}>
+                    <AlertIcon />
                     {meta.error}
                 </Alert>
             ) : null}
@@ -23,7 +22,7 @@ const MyTextInput = ({label, ...props}) => {
     );
 };
 
-// And now we can use these
+// Formik form for updating customer
 const UpdateCustomerForm = ({ fetchCustomers, initialValues, customerId }) => {
     return (
         <>
@@ -34,35 +33,35 @@ const UpdateCustomerForm = ({ fetchCustomers, initialValues, customerId }) => {
                         .max(15, 'Must be 15 characters or less')
                         .required('Required'),
                     email: Yup.string()
-                        .email('Must be 20 characters or less')
+                        .email('Invalid email address')
                         .required('Required'),
                     age: Yup.number()
                         .min(16, 'Must be at least 16 years of age')
                         .max(100, 'Must be less than 100 years of age')
-                        .required(),
+                        .required('Required'),
                 })}
-                onSubmit={(updatedCustomer, {setSubmitting}) => {
+                onSubmit={(updatedCustomer, { setSubmitting }) => {
                     setSubmitting(true);
                     updateCustomer(customerId, updatedCustomer)
-                        .then(res => {
-                            console.log(res);
+                        .then(() => {
                             successNotification(
                                 "Customer updated",
                                 `${updatedCustomer.name} was successfully updated`
-                            )
+                            );
                             fetchCustomers();
-                        }).catch(err => {
-                        console.log(err);
-                        errorNotification(
-                            err.code,
-                            err.response.data.message
-                        )
-                    }).finally(() => {
-                        setSubmitting(false);
-                    })
+                        })
+                        .catch(err => {
+                            errorNotification(
+                                err.code,
+                                err.response.data.message
+                            );
+                        })
+                        .finally(() => {
+                            setSubmitting(false);
+                        });
                 }}
             >
-                {({isValid, isSubmitting, dirty}) => (
+                {({ isValid, isSubmitting, dirty }) => (
                     <Form>
                         <Stack spacing={"24px"}>
                             <MyTextInput
@@ -76,7 +75,7 @@ const UpdateCustomerForm = ({ fetchCustomers, initialValues, customerId }) => {
                                 label="Email Address"
                                 name="email"
                                 type="email"
-                                placeholder="jane@formik.com"
+                                placeholder="jane@example.com"
                             />
 
                             <MyTextInput
@@ -86,7 +85,12 @@ const UpdateCustomerForm = ({ fetchCustomers, initialValues, customerId }) => {
                                 placeholder="20"
                             />
 
-                            <Button disabled={!(isValid && dirty) || isSubmitting} type="submit">Submit</Button>
+                            <Button
+                                disabled={!(isValid && dirty) || isSubmitting}
+                                type="submit"
+                            >
+                                Submit
+                            </Button>
                         </Stack>
                     </Form>
                 )}

@@ -1,3 +1,4 @@
+// Provides authentication context and functions to manage user authentication state
 import {
     createContext,
     useContext,
@@ -7,8 +8,10 @@ import {
 import {getCustomers, login as performLogin} from "../../services/client.js";
 import { jwtDecode } from 'jwt-decode';
 
+// Create a context for authentication
 const AuthContext = createContext({});
 
+// Authentication provider component
 const AuthProvider = ({ children }) => {
 
     const [customer, setCustomer] = useState(null);
@@ -23,10 +26,13 @@ const AuthProvider = ({ children }) => {
             })
         }
     }
+
+    // Initialize customer state on component mount
     useEffect(() => {
         setCustomerFromToken()
     }, [])
 
+    // Login function that authenticates the user and updates state
     const login = async (usernameAndPassword) => {
         return new Promise((resolve, reject) => {
             performLogin(usernameAndPassword).then(res => {
@@ -43,10 +49,14 @@ const AuthProvider = ({ children }) => {
             })
         })
     }
+
+    // Logout function that clears authentication state
     const logOut = () => {
         localStorage.removeItem("access_token")
         setCustomer(null)
     }
+
+    // Check if the customer is authenticated based on the token expiration
     const isCustomerAuthenticated = () => {
         const token = localStorage.getItem("access_token");
         if (!token) {
@@ -71,5 +81,7 @@ const AuthProvider = ({ children }) => {
         </AuthContext.Provider>
     )
 }
+
+// Custom hook to use authentication context
 export const useAuth = () => useContext(AuthContext);
 export default AuthProvider;

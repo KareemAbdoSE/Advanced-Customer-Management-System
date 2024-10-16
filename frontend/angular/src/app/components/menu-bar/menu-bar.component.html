@@ -1,3 +1,5 @@
+<!-- Template for the MenuBarComponent: displays the sidebar menu -->
+
 <h4 class="text-center mt-0">
   Dashboard
 </h4>
@@ -10,8 +12,9 @@
   ></p-avatar>
 </div>
 <div>
-  <app-menu-item *ngFor="let item of menu"
-                 [menuItem] = "item"
+  <app-menu-item
+    *ngFor="let item of menu"
+    [menuItem]="item"
   >
   </app-menu-item>
 </div>

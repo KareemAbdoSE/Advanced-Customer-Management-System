@@ -1,3 +1,4 @@
+// Entry point of the application that sets up routing and providers
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import Customer from './Customer.jsx'
@@ -8,11 +9,12 @@ import Login from "./components/login/Login.jsx";
 import AuthProvider from "./components/context/AuthContext.jsx";
 import ProtectedRoute from "./components/shared/ProtectedRoute.jsx";
 import Signup from "./components/signup/Signup";
-
 import { createStandaloneToast } from '@chakra-ui/react'
 import Home from "./Home.jsx";
 
 const { ToastContainer } = createStandaloneToast();
+
+// Define application routes
 const router = createBrowserRouter([
     {
         path: "/",
@@ -32,6 +34,7 @@ const router = createBrowserRouter([
     }
 ])
 
+// Render the application
 ReactDOM
     .createRoot(document.getElementById('root'))
     .render(
