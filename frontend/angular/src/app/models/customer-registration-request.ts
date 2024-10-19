@@ -1,6 +1,7 @@
 // Model for customer registration requests
 
 export interface CustomerRegistrationRequest {
+  id?: number;
   name?: string;
   email?: string;
   password?: string;
