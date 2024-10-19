@@ -17,6 +17,8 @@ export class CustomerCardComponent {
 
   @Output()
   delete: EventEmitter<CustomerDTO> = new EventEmitter<CustomerDTO>();
+  @Output()
+  update: EventEmitter<CustomerDTO> = new EventEmitter<CustomerDTO>();
 
   // Generates customer image URL based on gender and index
   get customerImage(): string {
@@ -27,5 +29,9 @@ export class CustomerCardComponent {
   // Emits delete event
   onDelete() {
     this.delete.emit(this.customer);
+  }
+  // Update
+  onUpdate() {
+    this.update.emit(this.customer);
   }
 }
