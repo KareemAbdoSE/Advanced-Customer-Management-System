@@ -1,4 +1,4 @@
-# Customer Management System (Work in Progress)
+# Customer Management System (Work in Progress) 
 
 A comprehensive Spring Boot application for managing customer data, demonstrating key concepts like RESTful APIs, Spring Data JPA, PostgreSQL integration, and more. This project is currently under development and showcases a fully functional CRUD application, complete with database integration and preparation for deployment to the cloud.
 
