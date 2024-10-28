@@ -1,5 +1,4 @@
 // Component handling user login functionality
-
 import { Component } from '@angular/core';
 import { AuthenticationRequest } from '../../models/authentication-request';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
@@ -19,7 +18,7 @@ export class LoginComponent {
     private router: Router
   ) {}
 
-  // Attempts to log in the user
+  // Attempt to log in the user
   login() {
     this.errorMsg = '';
     this.authenticationService.login(this.authenticationRequest)
@@ -34,5 +33,10 @@ export class LoginComponent {
           }
         }
       });
+  }
+
+  // Navigate to the registration page
+  register() {
+    this.router.navigate(['register']);
   }
 }
